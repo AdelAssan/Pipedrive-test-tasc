@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Service Form</title>
+<style>
+  body { font-family: Arial, sans-serif; }
+  .container { width: 80%; margin: 20px auto; }
+  input, select, button { width: 100%; padding: 10px; margin: 10px 0; }
+</style>
+</head>
+<body>
+<div class="container">
+  <form id="serviceForm">
+    <!-- Client Details Section -->
+    <fieldset>
+      <legend>Client details</legend>
+      <input type="text" name="firstName" placeholder="First name" required>
+      <input type="text" name="lastName" placeholder="Last name" required>
+      <input type="tel" name="phone" placeholder="Phone" required>
+      <input type="email" name="email" placeholder="Email (optional)">
+    </fieldset>
+
+    <!-- Job Details Section -->
+    <fieldset>
+      <legend>Job details</legend>
+      <select name="jobType" required>
+        <option value="">Select job type</option>
+        <option value="type1">Type 1</option>
+        <option value="type2">Type 2</option>
+      </select>
+      <select name="jobSource" required>
+        <option value="">Select job source</option>
+        <option value="source1">Source 1</option>
+        <option value="source2">Source 2</option>
+      </select>
+      <textarea name="jobDescription" placeholder="Job description (optional)"></textarea>
+    </fieldset>
+
+    <!-- Service Location Section -->
+    <fieldset>
+      <legend>Service location</legend>
+      <input type="text" name="address" placeholder="Address" required>
+      <input type="text" name="city" placeholder="City" required>
+      <input type="text" name="state" placeholder="State" required>
+      <input type="text" name="zipCode" placeholder="Zip code" required>
+      <select name="area" required>
+        <option value="">Select area</option>
+        <option value="area1">Area 1</option>
+        <option value="area2">Area 2</option>
+      </select>
+    </fieldset>
+
+    <!-- Scheduled Section -->
+    <fieldset>
+      <legend>Scheduled</legend>
+      <input type="date" name="startDate" required>
+      <input type="time" name="startTime" required>
+      <input type="time" name="endTime" required>
+      <select name="testSelect" required>
+        <option value="">Test select</option>
+        <option value="option1">Option 1</option>
+        <option value="option2">Option 2</option>
+      </select>
+    </fieldset>
+
+    <button type="submit">Submit</button>
+  </form>
+</div>
+
+<script>
+document.getElementById('serviceForm').addEventListener('submit', function(event) {
+  event.preventDefault();
+  // Here you will handle the form submission.
+  // For example, by sending the data to your server or directly to Pipedrive via API.
+  // You will need server-side code or JavaScript to process the submission.
+  fetch('https://api.pipedrive.com/v1/deals?api_token=10ea5126f0114f2f005ce2f857c2d71f0860c12f', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    title: 'Deal from iframe',
+    value: '1000',
+    currency: 'USD',
+    // ... other deal fields
+  }),
+})
+.then(response => response.json())
+.then(data => console.log(data))
+.catch((error) => console.error('Error:', error));
+
+});
+</script>
+</body>
+</html>
